@@ -27,7 +27,7 @@ class KategoriController extends Controller
 	public function search(Request $request)
     {
         $kategori = $request->get('search');
-        $kategori = Kategori::where('judul', 'LIKE', '%'.$kategori.'%')->orderBy('id','DESC')->paginate(25);
+        $kategori = Kategori::where('nama_kategori', 'LIKE', '%'.$kategori.'%')->orderBy('id','DESC')->paginate(25);
 		return view('admin.kategori.index',compact('kategori'));
     }
 	

@@ -8,10 +8,10 @@
 	<meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
 	<meta name="author" content="Bootlab">
 
-	<title>MTsN 1 Kendari</title>
+	<title>Sistem Informasi Perpustakaan</title>
 
     	<!-- Favicons -->
-	<link href="{{ asset('/assets/img/mtsn.png') }}" rel="icon">
+	<link href="{{ asset('/assets/img/Lambang_Kabupaten_Kolaka_Timur.png') }}" rel="icon">
     	<link href="{{ asset('/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 	
 	<link rel="preconnect" href="//fonts.gstatic.com/" crossorigin="">
@@ -59,7 +59,7 @@
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content ">
 				<a class="sidebar-brand" href="{{ url('/') }}">
-				  <img src="{{ asset('/assets/img/logo.png') }}" height="60" width="265">
+				  <img src="{{ asset('/assets/img/logo.png') }}" height="55" width="240">
 				</a>
 
 				<ul class="sidebar-nav">
@@ -94,6 +94,11 @@
 					<li class="sidebar-header">
 						SETTING
 					</li>
+					<li class="sidebar-item {{ (request()->is('kategori*')) ? 'active' : '' }}">
+						<a href="{{ url('/kategori') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Kategori</span>
+						</a>
+					</li>
 					<li class="sidebar-item {{ (request()->is('pengaturan*')) ? 'active' : '' }}">
 						<a href="{{ url('/pengaturan') }}" class="sidebar-link">
 						  <i class="align-middle" data-feather="list"></i> <span>Pengaturan</span>
@@ -108,7 +113,7 @@
 					@endif
 				<div class="sidebar-bottom d-none d-lg-block">
 					<div class="media">
-						<img class="rounded-circle mr-3" src="{{ asset('/assets2/img/avatars/avatar.jpg') }}" alt="Chris Wood" width="40" height="40">
+						<img class="rounded-circle mr-3" src="{{ asset('/assets/img/avatars/15.jpg') }}" alt="Chris Wood" width="40" height="40">
 						<div class="media-body">
 							<h5 class="mb-1">{{ Auth::user()->name }} </h5>
 							<div>
@@ -136,7 +141,7 @@
 						    </a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
-							`<img src="{{ asset('/assets/img/avatars/avatar.jpg') }}" class="avatar img-fluid rounded-circle mr-1" alt="Chris Wood"> <span class="text-dark">{{ Auth::user()->name }} </span>
+							`<img src="{{ asset('/assets/img/avatars/15.jpg') }}" class="avatar img-fluid rounded-circle mr-1" alt="Chris Wood"> <span class="text-dark">{{ Auth::user()->name }} </span>
 						    </a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<a class="dropdown-item" href="{{ url('/password') }}">Ganti Password</a>

@@ -28,9 +28,23 @@ class DendaController extends Controller
 	## Tampilkan Data Search
 	public function search(Request $request)
     {
-        $denda = $request->get('search');
-        $denda = Denda::where('buku_tbl', 'LIKE', '%'.$denda.'%')->orderBy('id','DESC')->paginate(25);
-		return view('admin.denda.index',compact('denda'));
+        $search = $request->get('search');
+        $denda = Denda::
+                where('tanggal_pinjam', 'LIKE', '%'.$search.'%')
+                ->orWhere('tanggal_hrs_kembali', 'LIKE', '%'.$search.'%')
+                ->orWhere('tanggal_kembali', 'LIKE', '%'.$search.'%')
+                ->orWhere('hari', 'LIKE', '%'.$search.'%')
+                ->orWhere('denda', 'LIKE', '%'.$search.'%')
+                ->orwhereHas('buku', function ($query) use ($search) {
+                    $query->where('judul', 'LIKE', '%'. $search .'%');
+                })
+                ->orWhereHas('anggota', function ($query) use ($search) {
+                    $query->where('nama', 'LIKE', '%'. $search .'%');
+                })
+                ->orderBy('id','DESC')->paginate(25);
+
+        return view('admin.denda.index',compact('denda'));
+
     }
 
     ## Tampilkan Detail

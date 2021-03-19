@@ -31,8 +31,17 @@ class PeminjamanController extends Controller
 	## Tampilkan Data Search
 	public function search(Request $request)
     {
-        $peminjaman = $request->get('search');
-        $peminjaman = Peminjaman::where('status',0)->where('judul', 'LIKE', '%'.$peminjaman.'%')->orderBy('id','DESC')->paginate(25);
+        $search = $request->get('search');
+        $peminjaman = Peminjaman::
+                where('tanggal_pinjam', 'LIKE', '%'.$search.'%')
+                ->orWhere('tanggal_kembali', 'LIKE', '%'.$search.'%')
+                ->orwhereHas('buku', function ($query) use ($search) {
+                    $query->where('judul', 'LIKE', '%'. $search .'%');
+                })
+                ->orWhereHas('anggota', function ($query) use ($search) {
+                    $query->where('nama', 'LIKE', '%'. $search .'%');
+                })
+                ->orderBy('id','DESC')->paginate(25);
         $pengaturan = DB::table('pengaturan_tbl')->where('id',1)->get()->toArray();
 		return view('admin.peminjaman.index',compact('peminjaman'));
     }

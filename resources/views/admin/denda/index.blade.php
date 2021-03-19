@@ -57,11 +57,11 @@
 													<td>{{ ($denda ->currentpage()-1) * $denda ->perpage() + $loop->index + 1 }}</td>
 													<td>{{ $v->anggota->nama }}</td>
 													<td>{{ $v->buku->judul }}</td>
-													<td>{{ $v->tanggal_pinjam }}</td>
-													<td>{{ $v->tanggal_hrs_kembali }}</td>
-													<td>{{ $v->tanggal_kembali }}</td>
+													<td>{{ date('d-m-Y', strtotime($v->tanggal_pinjam)) }}</td>
+													<td>{{ date('d-m-Y', strtotime($v->tanggal_hrs_kembali)) }}</td>
+													<td>{{ date('d-m-Y', strtotime($v->tanggal_kembali)) }}</td>
 													<td>{{ $v->hari }}</td>
-													<td>{{ $v->denda }}</td>
+													<td>{{ number_format($v->denda,0,",",".") }}</td>
 													<td>
 														<a href="{{ url('/peminjaman/show/'.$v->id ) }}"><i class="align-middle" data-feather="eye"></i></a> |
 														<a href="{{ url('/denda/hapus/'.$v->id ) }}" onclick="return confirm('Anda Yakin ?');"><i class="align-middle" data-feather="trash"></i></a>

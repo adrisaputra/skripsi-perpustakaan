@@ -61,7 +61,7 @@
 													<td>{{ $v->isbn }}</td>
 													<td>{{ $v->judul }}</td>
 													<td>{{ $v->nama_penulis }}</td>
-													<td>{{ $v->nama_kategori }}</td>
+													<td>{{ $v->kategori->nama_kategori }}</td>
 													<td>
 														<a href="{{ url('/buku/edit/'.$v->id ) }}"><i class="align-middle" data-feather="edit-2"></i></a> |
 														<a href="{{ url('/buku/hapus/'.$v->id ) }}" onclick="return confirm('Anda Yakin ?');"><i class="align-middle" data-feather="trash"></i></a>

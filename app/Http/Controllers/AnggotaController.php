@@ -26,8 +26,17 @@ class AnggotaController extends Controller
 	## Tampilkan Data Search
 	public function search(Request $request)
     {
-        $anggota = $request->get('search');
-        $anggota = Anggota::where('judul', 'LIKE', '%'.$anggota.'%')->orderBy('id','DESC')->paginate(25);
+        $anggota =  $request->get('search');
+        $anggota =  Anggota::
+                    where(function ($query) use ($anggota) {
+                        $query->where('nis', 'LIKE', '%'.$anggota.'%')
+                            ->orWhere('nama', 'LIKE', '%'.$anggota.'%')
+                            ->orWhere('jenis_kelamin', 'LIKE', '%'.$anggota.'%')
+                            ->orWhere('kelas', 'LIKE', '%'.$anggota.'%')
+                            ->orWhere('telepon', 'LIKE', '%'.$anggota.'%')
+                            ->orWhere('alamat', 'LIKE', '%'.$anggota.'%')
+                            ->orWhere('email', 'LIKE', '%'.$anggota.'%');
+                    })->orderBy('id','DESC')->paginate(25);
 		return view('admin.anggota.index',compact('anggota'));
     }
 	
@@ -63,7 +72,7 @@ class AnggotaController extends Controller
         if($request->file('foto')){
             $input['foto'] = time().'.'.$request->foto->getClientOriginalExtension();
             $request->foto->move(public_path('upload/foto'), $input['foto']);
-        }	
+        }
         
 		$input['user_id'] = Auth::user()->id;
 		

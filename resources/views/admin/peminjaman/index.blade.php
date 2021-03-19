@@ -57,8 +57,8 @@
 													<td>{{ ($peminjaman ->currentpage()-1) * $peminjaman ->perpage() + $loop->index + 1 }}</td>
 													<td>{{ $v->anggota->nama }}</td>
 													<td>{{ $v->buku->judul }}</td>
-													<td>{{ $v->tanggal_pinjam }}</td>
-													<td>{{ $v->tanggal_kembali }}</td>
+													<td>{{ date('d-m-Y', strtotime($v->tanggal_pinjam)) }}</td>
+													<td>{{ date('d-m-Y', strtotime($v->tanggal_kembali)) }}</td>
 													<?php 
 															$t = date_create($v->tanggal_kembali);
 															$n = date_create(date('Y-m-d'));
@@ -69,7 +69,7 @@
 															$total_denda = $hari * $pengaturan[0]->jumlah;
 														?>
 													<td>{{ $hari }}</td>
-													<td>{{ $total_denda }}</td>
+													<td>{{ number_format($total_denda,0,",",".") }}</td>
 													<td>
 														<a href="{{ url('/peminjaman/show/'.$v->id ) }}"><i class="align-middle" data-feather="eye"></i></a> |
 														<a href="{{ url('/peminjaman/edit/'.$v->id ) }}"><i class="align-middle" data-feather="edit-2"></i></a> |

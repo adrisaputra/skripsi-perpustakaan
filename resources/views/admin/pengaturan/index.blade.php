@@ -51,7 +51,7 @@
 												<tr>
 													<td>{{ ($pengaturan ->currentpage()-1) * $pengaturan ->perpage() + $loop->index + 1 }}</td>
 													<td>{{ $v->nama }}</td>
-													<td>{{ $v->jumlah }}</td>
+													<td>{{ number_format($v->jumlah,0,",",".") }}</td>
 													<td>
 														<a href="{{ url('/pengaturan/edit/'.$v->id ) }}"><i class="align-middle" data-feather="edit-2"></i></a>
 													</td>

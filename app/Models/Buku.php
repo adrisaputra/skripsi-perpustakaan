@@ -28,5 +28,10 @@ class Buku extends Model
     {
         return $this->hasOne('App\Models\Peminjaman');
     }
-    
+        
+    public function kategori()
+    {
+        return $this->belongsTo('App\Models\Kategori');
+    }
+
 }

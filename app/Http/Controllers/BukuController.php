@@ -28,7 +28,15 @@ class BukuController extends Controller
 	public function search(Request $request)
     {
         $buku = $request->get('search');
-        $buku = Buku::where('judul', 'LIKE', '%'.$buku.'%')->orderBy('id','DESC')->paginate(25);
+        $buku = Buku::
+                where('isbn', 'LIKE', '%'.$buku.'%')
+                ->orWhere('judul', 'LIKE', '%'.$buku.'%')
+                ->orWhere('nama_penulis', 'LIKE', '%'.$buku.'%')
+                ->orWhere('nama_penerbit', 'LIKE', '%'.$buku.'%')
+                ->orWhere('tahun_terbit', 'LIKE', '%'.$buku.'%')
+                ->orwhereHas('kategori', function ($query) use ($buku) {
+                    $query->where('nama_kategori', 'LIKE', '%'. $buku .'%');
+                })->orderBy('id','DESC')->paginate(25);
 		return view('admin.buku.index',compact('buku'));
     }
 	

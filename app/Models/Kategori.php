@@ -13,4 +13,11 @@ class Kategori extends Model
         'nama_kategori',
         'user_id'
     ];
+
+    
+    public function buku()
+    {
+        return $this->hasOne('App\Models\Buku');
+    }
+        
 }

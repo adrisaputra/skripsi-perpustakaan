@@ -9,6 +9,7 @@ use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\DendaController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,4 +93,11 @@ Route::get('/user/edit/{user}', [UserController::class, 'edit']);
 Route::put('/user/edit/{user}', [UserController::class, 'update']);
 Route::get('/user/hapus/{user}',[UserController::class, 'delete']);
 
+## Password
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('password', [PasswordController::class, 'edit'])
+        ->name('user.password.edit');
+     Route::patch('password', [PasswordController::class, 'update'])
+        ->name('user.password.update');
+});
 

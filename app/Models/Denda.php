@@ -22,11 +22,11 @@ class Denda extends Model
 
     public function anggota()
     {
-        return $this->belongsTo('App\Models\Anggota');
+        return $this->belongsTo('App\Models\Anggota','anggota_id');
     }
 
     public function buku()
     {
-        return $this->belongsTo('App\Models\Buku');
+        return $this->belongsTo('App\Models\Buku','buku_id');
     }
 }
