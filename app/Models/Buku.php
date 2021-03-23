@@ -28,6 +28,11 @@ class Buku extends Model
     {
         return $this->hasOne('App\Models\Peminjaman');
     }
+       
+    public function pengembalian()
+    {
+        return $this->hasOne('App\Models\Pengembalian');
+    }
         
     public function kategori()
     {

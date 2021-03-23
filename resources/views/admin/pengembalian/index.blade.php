@@ -7,18 +7,17 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h3>Data Peminjaman</h3>
+									<h3>Data Pengembalian</h3>
 								</div>
 								<div class="card-body">
-									<form action="{{ url('/peminjaman/search') }}" method="GET">
+									<form action="{{ url('/pengembalian/search') }}" method="GET">
 									<div class="row">
 										<div class="col-md-9">
-											<a href="{{ url('/peminjaman/create') }}" class="btn btn-success btn-flat">Tambah Data</a>
-											<a href="{{ url('/peminjaman') }}" class="btn btn-warning btn-flat">Refresh</a>
+											<a href="{{ url('/pengembalian') }}" class="btn btn-warning btn-flat">Refresh</a>
 										</div>
 										<div class="col-md-3">
 											<div class="input-group">
-												<input type="text" class="form-control" name="search" placeholder="Peminjaman...">
+												<input type="text" class="form-control" name="search" placeholder="Pengembalian...">
 												<span class="input-group-btn">
 													<input type="submit" name="submit" class="btn btn-info btn-flat" value="Go">
 												</span>
@@ -46,27 +45,36 @@
 													<th style="width:10%;">Nama Buku</th>
 													<th style="width:10%;">Tanggal Pinjam</th>
 													<th style="width:10%;">Tanggal Kembali</th>
+													<th style="width:10%;">Terlambat (Hari)</th>
+													<th style="width:10%;">Denda (Hari)</th>
 													<th style="width:10%;">Aksi</th>
 												</tr>
 											</thead>
 											<tbody>
-												@foreach($peminjaman as $v)
+												@foreach($pengembalian as $v)
 												<tr>
-													<td>{{ ($peminjaman ->currentpage()-1) * $peminjaman ->perpage() + $loop->index + 1 }}</td>
+													<td>{{ ($pengembalian ->currentpage()-1) * $pengembalian ->perpage() + $loop->index + 1 }}</td>
 													<td>{{ $v->anggota->nama }}</td>
 													<td>{{ $v->buku->judul }}</td>
 													<td>{{ date('d-m-Y', strtotime($v->tanggal_pinjam)) }}</td>
 													<td>{{ date('d-m-Y', strtotime($v->tanggal_kembali)) }}</td>
+													<?php $total_denda = $v->hari * $pengaturan[0]->jumlah; ?>
+													<td>@if($v->hari>0)
+															{{ $v->hari }} Hari
+														@endif
+													</td>
+													<td>@if($v->hari>0)
+															{{ number_format($total_denda,0,",",".") }}
+														@endif</td>
 													<td>
-														<a href="{{ url('/peminjaman/edit/'.$v->id ) }}"><i class="align-middle" data-feather="edit-2"></i></a> |
-														<a href="{{ url('/peminjaman/hapus/'.$v->id ) }}" onclick="return confirm('Anda Yakin ?');"><i class="align-middle" data-feather="trash"></i></a>
+														<a href="{{ url('/pengembalian/show/'.$v->id ) }}"><i class="align-middle" data-feather="eye"></i></a>
 													</td>
 												</tr>
 												@endforeach
 											</tbody>
 										</table>
 									</div><br>
-									<div align="right">{{ $peminjaman->appends(Request::only('search'))->links() }}</div>
+									<div align="right">{{ $pengembalian->appends(Request::only('search'))->links() }}</div>
 								</div>
 							</div>
 						</div>

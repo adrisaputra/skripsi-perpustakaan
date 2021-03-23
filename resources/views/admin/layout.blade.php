@@ -81,9 +81,9 @@
 						  <i class="align-middle" data-feather="list"></i> <span>Peminjaman</span>
 						</a>
 					</li>
-					<li class="sidebar-item {{ (request()->is('denda*')) ? 'active' : '' }}">
-						<a href="{{ url('/denda') }}" class="sidebar-link">
-						  <i class="align-middle" data-feather="list"></i> <span>Denda</span>
+					<li class="sidebar-item {{ (request()->is('pengembalian*')) ? 'active' : '' }}">
+						<a href="{{ url('/pengembalian') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Pengembalian</span>
 						</a>
 					</li>
 					<li class="sidebar-item {{ (request()->is('anggota*')) ? 'active' : '' }}">
