@@ -46,7 +46,7 @@
 													<th style="width:10%;">Tanggal Pinjam</th>
 													<th style="width:10%;">Tanggal Kembali</th>
 													<th style="width:10%;">Terlambat (Hari)</th>
-													<th style="width:10%;">Denda (Hari)</th>
+													<th style="width:10%;">Denda (Rp)</th>
 													<th style="width:10%;">Aksi</th>
 												</tr>
 											</thead>
