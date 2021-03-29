@@ -59,8 +59,13 @@ Route::get('/anggota/hapus/{anggota}',[AnggotaController::class, 'delete']);
 ## Peminjaman
 Route::get('/peminjaman', [PeminjamanController::class, 'index']);
 Route::get('/peminjaman/search', [PeminjamanController::class, 'search']);
+Route::get('/peminjaman/create', [PeminjamanController::class, 'create']);
+Route::post('/peminjaman', [PeminjamanController::class, 'store']);
+Route::get('/peminjaman/edit/{peminjaman}', [PeminjamanController::class, 'edit']);
+Route::put('/peminjaman/edit/{peminjaman}', [PeminjamanController::class, 'update']);
 Route::get('/peminjaman/show/{peminjaman}', [PeminjamanController::class, 'show']);
 Route::put('/peminjaman/edit2/{peminjaman}', [PeminjamanController::class, 'update2']);
+Route::get('/peminjaman/hapus/{peminjaman}',[PeminjamanController::class, 'delete']);
 
 ## Peminjaman
 Route::get('/pengembalian', [PengembalianController::class, 'index']);
