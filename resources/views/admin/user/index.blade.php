@@ -43,7 +43,9 @@
 												<tr>
 													<th style="width:5%;">#</th>
 													<th style="width:30%;">Nama User</th>
-													<th style="width:45%;">Email</th>
+													<th style="width:30%;">Email</th>
+													<th style="width:10%;">Group</th>
+													<th style="width:10%;">Status</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -52,6 +54,20 @@
 													<td>{{ $loop->iteration }}</td>
 													<td>{{ $v->name }}</td>
 													<td>{{ $v->email }}</td>
+													<td>@if($v->group==1)
+														<span class="badge badge-danger">Administrator</span>
+														@elseif($v->group==2)
+														<span class="badge badge-warning">Operator</span>
+														@elseif($v->group==3)
+														<span class="badge badge-info">Anggota</span>
+														@endif
+													</td>
+													<td>@if($v->status==0)
+														<span class="badge badge-danger">Tidak Aktif</span>
+														@elseif($v->status==1)
+														<span class="badge badge-success">Aktif</span>
+														@endif
+													</td>
 													<td>
 														<a href="{{ url('/user/edit/'.$v->id) }}"><i class="align-middle" data-feather="edit-2"></i></a> 
 														

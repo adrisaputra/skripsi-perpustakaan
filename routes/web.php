@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegistrasiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\KategoriController;
@@ -27,7 +29,14 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/clear-cache-all', function() {
+    Artisan::call('cache:clear');
+    dd("Cache Clear All");
+});
+
 Route::get('/dashboard', [HomeController::class, 'index']);
+Route::post('/registrasi', [RegistrasiController::class, 'store']);
+Route::post('/login', [LoginController::class, 'authenticate']);
 
 ## Buku
 Route::get('/buku', [BukuController::class, 'index']);

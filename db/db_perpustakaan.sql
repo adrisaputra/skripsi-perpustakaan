@@ -27,13 +27,14 @@ CREATE TABLE IF NOT EXISTS `anggota_tbl` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Membuang data untuk tabel db_perpustakaan.anggota_tbl: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_perpustakaan.anggota_tbl: ~3 rows (lebih kurang)
 /*!40000 ALTER TABLE `anggota_tbl` DISABLE KEYS */;
 INSERT INTO `anggota_tbl` (`id`, `nis`, `nama`, `jenis_kelamin`, `kelas`, `telepon`, `alamat`, `email`, `foto`, `tanggal_buat`, `user_id`, `created_at`, `updated_at`) VALUES
-	(1, '12345', 'Eis Nur Hiliya', 'Perempuan', '12 IPA 1', '082259504093', 'JL. Pemuda NO 15 A', 'adri@gmail.com', '1615858510.jpg', '2021-03-16', 1, '2021-03-16 01:35:10', '2021-03-16 09:43:22'),
-	(2, '23445', 'Adri Saputra Ibrahim', 'Laki-laki', 'XII', '00898219821', 'sagsahg gsahgsahgsa', NULL, '1616115605.jpg', '2021-03-19', 1, '2021-03-19 09:00:05', '2021-03-19 09:00:05');
+	(1, '1234567890', 'ADRI SAPUTRA', 'Laki-laki', '12IPA1', '082882', NULL, NULL, NULL, NULL, NULL, '2021-04-27 13:04:44', '2021-04-27 13:04:44'),
+	(2, '1234567891', 'RAHMAT', 'Laki-laki', '12 IPA 2', '2333', NULL, NULL, NULL, NULL, NULL, '2021-04-27 13:09:07', '2021-04-27 13:09:07'),
+	(3, '012345', 'MUHAMMAD ANDI', 'Laki-laki', '12IPA2', '05885', 'sasasasasa', NULL, NULL, '27-04-2021', 9, '2021-04-27 14:46:20', '2021-04-27 14:54:46');
 /*!40000 ALTER TABLE `anggota_tbl` ENABLE KEYS */;
 
 -- membuang struktur untuk table db_perpustakaan.buku_tbl
@@ -82,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `denda_tbl` (
 -- Membuang data untuk tabel db_perpustakaan.denda_tbl: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `denda_tbl` DISABLE KEYS */;
 INSERT INTO `denda_tbl` (`id`, `anggota_id`, `buku_id`, `tanggal_pinjam`, `tanggal_hrs_kembali`, `tanggal_kembali`, `hari`, `denda`, `user_id`, `created_at`, `updated_at`) VALUES
-	(1, 1, 1, '2021-03-08', '2021-03-15', '2021-03-19', 4, 8000, 1, '2021-03-19 10:48:14', '2021-03-19 10:48:14');
+	(1, 1, 1, '2021-03-08', '2021-03-15', '2021-03-23', 8, 16000, 1, '2021-03-23 19:28:44', '2021-03-23 19:28:44');
 /*!40000 ALTER TABLE `denda_tbl` ENABLE KEYS */;
 
 -- membuang struktur untuk table db_perpustakaan.failed_jobs
@@ -162,14 +163,13 @@ CREATE TABLE IF NOT EXISTS `peminjaman_tbl` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- Membuang data untuk tabel db_perpustakaan.peminjaman_tbl: ~2 rows (lebih kurang)
 /*!40000 ALTER TABLE `peminjaman_tbl` DISABLE KEYS */;
 INSERT INTO `peminjaman_tbl` (`id`, `anggota_id`, `buku_id`, `tanggal_pinjam`, `tanggal_kembali`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-	(1, 1, 1, '2021-03-08', '2021-03-15', 1, 1, '2021-03-16 10:28:38', '2021-03-19 10:48:14'),
-	(2, 2, 1, '2021-03-19', '2021-03-19', 1, 1, '2021-03-19 09:14:12', '2021-03-19 10:48:54'),
-	(3, 2, 2, '2021-03-19', '2021-03-19', 1, 1, '2021-03-19 09:14:12', '2021-03-19 10:48:49');
+	(1, 1, 1, '2021-04-22', '2021-04-25', 0, 1, '2021-04-27 13:06:25', '2021-04-27 13:06:25'),
+	(2, 2, 2, '2021-04-20', '2021-04-23', 0, 1, '2021-04-27 13:10:02', '2021-04-27 13:10:02');
 /*!40000 ALTER TABLE `peminjaman_tbl` ENABLE KEYS */;
 
 -- membuang struktur untuk table db_perpustakaan.pengaturan_tbl
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `pengaturan_tbl` (
 -- Membuang data untuk tabel db_perpustakaan.pengaturan_tbl: ~2 rows (lebih kurang)
 /*!40000 ALTER TABLE `pengaturan_tbl` DISABLE KEYS */;
 INSERT INTO `pengaturan_tbl` (`id`, `nama`, `jumlah`, `user_id`, `created_at`, `updated_at`) VALUES
-	(1, 'Denda', '2000', 1, '2021-03-15 22:14:41', '2021-03-19 10:48:04');
+	(1, 'Denda', '1000', 1, '2021-03-15 22:14:41', '2021-03-23 19:47:36');
 /*!40000 ALTER TABLE `pengaturan_tbl` ENABLE KEYS */;
 
 -- membuang struktur untuk table db_perpustakaan.personal_access_tokens
@@ -222,14 +222,11 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   KEY `sessions_last_activity_index` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel db_perpustakaan.sessions: ~3 rows (lebih kurang)
+-- Membuang data untuk tabel db_perpustakaan.sessions: ~2 rows (lebih kurang)
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-	('axCDQZ41f8JkOfjHNTxFVN60tomGR2vVSWx1kJcT', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUGhKT2dZTXFUUG5kQVdHMnVGZ3NPVDNoVXVUaDNrODRVa0JyMnRsTSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNDoiaHR0cDovL2xvY2FsaG9zdC9wZXJwdXN0YWthYW4vYnVrdSI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM0OiJodHRwOi8vbG9jYWxob3N0L3BlcnB1c3Rha2Fhbi9idWt1Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1616162549),
-	('btZtZf23GgqG4Nlhi3GtErsDBrGxYnWrA8xTwTzX', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUFpHU2FNWlhMM0xzOGFUOEZtamVNSFN0SE1IcGdUWjgzU1hVWk5oNyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNToiaHR0cDovL2xvY2FsaG9zdC9wZXJwdXN0YWthYW4vZGVuZGEiO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNToiaHR0cDovL2xvY2FsaG9zdC9wZXJwdXN0YWthYW4vZGVuZGEiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1616162549),
-	('IWHGOrZmUoGcinEObFF6c7vTKwOUwVjnxuHiufeM', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVXdMdDdsd3N1Sjh1aUpyMExPVFByZFRUcmJDQ2lldkxTQlV1T2F2QyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNToiaHR0cDovL2xvY2FsaG9zdC9wZXJwdXN0YWthYW4vZGVuZGEiO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNToiaHR0cDovL2xvY2FsaG9zdC9wZXJwdXN0YWthYW4vZGVuZGEiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1616162549),
-	('V30AePis9MpoKJ0koP0OKPXXMAzq1zfbkPXFLJmN', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUFBhdjg0Wk5BbnpDYUtaVmZkb21vQUVZSHhIdlE1SUozVzlLUmZGVCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNDoiaHR0cDovL2xvY2FsaG9zdC9wZXJwdXN0YWthYW4vYnVrdSI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM0OiJodHRwOi8vbG9jYWxob3N0L3BlcnB1c3Rha2Fhbi9idWt1Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1616162549),
-	('YfHwOw3SvebX4f6s9XLsNNkDKuFuXGbWu3OIdsbo', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiS1BwNW4wZWRHeFpGQVREdDV3VFIydXo2dXE0cVNjZ1Q1QjkxeEl1OCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly9sb2NhbGhvc3QvcGVycHVzdGFrYWFuIjt9fQ==', 1616170003);
+	('39mrNx29PCyiP5utKqqKwGleD2lNFDPAnuYMqVhh', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoia0lhcFM3dUdKNVN4cDV0eGxmNE1lRzNobHA0UjhBbnVVVU1KMEZvbiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly9sb2NhbGhvc3QvcGVycHVzdGFrYWFuIjt9fQ==', 1619506615),
+	('OiP5kJWTK32ukzt2GROte1CNnDZXie4msjt8baWw', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoibjRYZEFHVkNmeGJMZGxkOUIzZ2lwTWk1Q2JFZnUwQWdsNzJQdGdjUSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly9sb2NhbGhvc3QvcGVycHVzdGFrYWFuL2FuZ2dvdGEiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkaTlSOVFGRWJYNG03dlRIcUxVU2c5dWZQSy9lZ1BWZlUwbWFEL1BKZHFVbzFqd0NLOEdHbHEiO30=', 1619506513);
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 
 -- membuang struktur untuk table db_perpustakaan.users
@@ -242,17 +239,23 @@ CREATE TABLE IF NOT EXISTS `users` (
   `two_factor_secret` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `group` int(11) DEFAULT NULL,
+  `nis` double DEFAULT NULL,
+  `status` int(11) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel db_perpustakaan.users: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_perpustakaan.users: ~5 rows (lebih kurang)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'administrator', 'administrator@gmail.com', NULL, '$2y$10$i9R9QFEbX4m7vTHqLUSg9ufPK/egPVfU0maD/PJdqUo1jwCK8GGlq', NULL, NULL, NULL, '2021-03-15 06:42:06', '2021-03-15 06:42:06'),
-	(2, 'operator', 'operator@gmail.com', NULL, '$2y$10$JgMblsUmqwdPGCDmB/Z2/.ERr7wty65aGJFya/D58Coc/9pd/qjoq', NULL, NULL, NULL, '2021-03-19 23:55:25', '2021-03-19 23:55:25');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `remember_token`, `group`, `nis`, `status`, `created_at`, `updated_at`) VALUES
+	(1, 'administrator', 'administrator@gmail.com', NULL, '$2y$10$i9R9QFEbX4m7vTHqLUSg9ufPK/egPVfU0maD/PJdqUo1jwCK8GGlq', NULL, NULL, NULL, 1, NULL, 1, '2021-03-15 06:42:06', '2021-03-15 06:42:06'),
+	(2, 'operator', 'operator@gmail.com', NULL, '$2y$10$okDG5WSxhmuW5QBtL.lEGO5L//OCVfJ8BBoix98CuWarbDArcv13y', NULL, NULL, NULL, 2, NULL, 1, '2021-03-19 23:55:25', '2021-04-27 14:37:14'),
+	(7, '1234567890', '1234567890@gmail.com', NULL, '$2y$10$CUaRWUcEtI8oas6L..Lhz.Mo9XKI/I/0TEauEQ83h.BBkZlJHemh2', NULL, NULL, NULL, 3, 1234567890, 1, '2021-04-27 13:04:44', '2021-04-27 13:04:44'),
+	(8, '1234567891', '1234567891@gmail.com', NULL, '$2y$10$cgZUFa7u55xscJ4JMNXwKeZNZROF.gliLVvfMSKQJBfk/TbtFea4a', NULL, NULL, NULL, 3, 1234567891, 1, '2021-04-27 13:09:07', '2021-04-27 14:37:24'),
+	(9, '012345', '012345@gmail.com', NULL, '$2y$10$C8YfPydwFPR5F4KY2MdT9elXQE4XOA1x2AIl4x.OCrv35NsEIZA4C', NULL, NULL, NULL, 3, 12345, 1, '2021-04-27 14:46:20', '2021-04-27 14:46:46');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

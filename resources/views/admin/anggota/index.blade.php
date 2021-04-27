@@ -10,6 +10,7 @@
 									<h3>Data Anggota</h3>
 								</div>
 								<div class="card-body">
+									@if(Auth::user()->group != 3)
 									<form action="{{ url('/anggota/search') }}" method="GET">
 									<div class="row">
 										<div class="col-md-9">
@@ -26,7 +27,7 @@
 										</div>
 									</div>
 									</form><br>
-									
+									@endif
 									@if ($message = Session::get('status'))
 									  <div class="alert alert-primary alert-dismissible" role="alert">
 											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -46,6 +47,7 @@
 													<th style="width:20%;">Nama Siswa</th>
 													<th style="width:20%;">Kelas</th>
 													<th style="width:20%;">Tanggal dibuat</th>
+													<th style="width:10%;">Status</th>
 													<th style="width:10%;">Aksi</th>
 												</tr>
 											</thead>
@@ -57,9 +59,17 @@
 													<td>{{ $v->nama }}</td>
 													<td>{{ $v->kelas }}</td>
 													<td>{{ $v->tanggal_buat }}</td>
+													<td>@if($v->status==0)
+														<span class="badge badge-danger">Tidak Aktif</span>
+														@elseif($v->status==1)
+														<span class="badge badge-success">Aktif</span>
+														@endif
+													</td>
 													<td>
-														<a href="{{ url('/anggota/edit/'.$v->id ) }}"><i class="align-middle" data-feather="edit-2"></i></a> |
-														<a href="{{ url('/anggota/hapus/'.$v->id ) }}" onclick="return confirm('Anda Yakin ?');"><i class="align-middle" data-feather="trash"></i></a>
+														<a href="{{ url('/anggota/edit/'.$v->id ) }}"><i class="align-middle" data-feather="edit-2"></i></a> 
+														@if(Auth::user()->group != 3) |
+															<a href="{{ url('/anggota/hapus/'.$v->id ) }}" onclick="return confirm('Anda Yakin ?');"><i class="align-middle" data-feather="trash"></i></a>
+														@endif
 													</td>
 												</tr>
 												@endforeach

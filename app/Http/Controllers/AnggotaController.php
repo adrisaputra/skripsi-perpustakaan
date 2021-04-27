@@ -19,7 +19,17 @@ class AnggotaController extends Controller
     ## Tampikan Data
     public function index()
     {
-        $anggota = Anggota::orderBy('id','DESC')->paginate(25);
+        if(Auth::user()->group == 3){
+            $anggota = Anggota::select('anggota_tbl.*','status')
+                        ->where('anggota_tbl.nis',Auth::user()->name)
+                        ->leftjoin('users', 'users.nis', '=', 'anggota_tbl.nis')
+                        ->orderBy('anggota_tbl.id','DESC')->paginate(25);
+        } else {
+            $anggota = Anggota::select('anggota_tbl.*','status')
+                        ->leftjoin('users', 'users.nis', '=', 'anggota_tbl.nis')
+                        ->orderBy('anggota_tbl.id','DESC')->paginate(25);
+        }
+       
 		return view('admin.anggota.index',compact('anggota'));
     }
 
@@ -27,8 +37,9 @@ class AnggotaController extends Controller
 	public function search(Request $request)
     {
         $anggota =  $request->get('search');
-        $anggota =  Anggota::
-                    where(function ($query) use ($anggota) {
+        $anggota =  Anggota::select('anggota_tbl.*','status')
+                    ->leftjoin('users', 'users.nis', '=', 'anggota_tbl.nis')
+                    ->where(function ($query) use ($anggota) {
                         $query->where('nis', 'LIKE', '%'.$anggota.'%')
                             ->orWhere('nama', 'LIKE', '%'.$anggota.'%')
                             ->orWhere('jenis_kelamin', 'LIKE', '%'.$anggota.'%')
@@ -36,7 +47,7 @@ class AnggotaController extends Controller
                             ->orWhere('telepon', 'LIKE', '%'.$anggota.'%')
                             ->orWhere('alamat', 'LIKE', '%'.$anggota.'%')
                             ->orWhere('email', 'LIKE', '%'.$anggota.'%');
-                    })->orderBy('id','DESC')->paginate(25);
+                    })->orderBy('anggota_tbl.id','DESC')->paginate(25);
 		return view('admin.anggota.index',compact('anggota'));
     }
 	
@@ -67,7 +78,7 @@ class AnggotaController extends Controller
 		$input['kelas'] = $request->kelas;
 		$input['telepon'] = $request->telepon;
 		$input['alamat'] = $request->alamat;
-		$input['tanggal_buat'] = date('Y-m-d');
+		$input['tanggal_buat'] = date('d-m-Y');
         
         if($request->file('foto')){
             $input['foto'] = time().'.'.$request->foto->getClientOriginalExtension();

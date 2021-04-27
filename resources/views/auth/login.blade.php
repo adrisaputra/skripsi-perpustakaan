@@ -7,9 +7,12 @@
                 <div class="text-center">
                     <img src="{{ asset('/assets/img/logo.png') }}" alt="Chris Wood" class="img-fluid" style="max-width: 100%;">
                 </div>
-                @error('status')
-                <br>
+                <!-- @error('status') -->
+                <!-- @enderror -->
+                <form method="POST" action="{{ route('login') }}">
+                @csrf
                 
+                @if ($message = Session::get('status'))
                   <div class="alert alert-danger alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -18,9 +21,7 @@
                             {{ $message }}
                         </div>
                     </div>
-                @enderror
-                <form method="POST" action="{{ route('login') }}">
-                @csrf
+                @endif
                     <div class="form-group">
                         <label>{{ __('Nama User') }}</label>
                         <input type="name" class="form-control form-control-lg" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="email" autofocus placeholder="Masukkan Nama User">
@@ -31,7 +32,8 @@
                         
                     </div>
                     <div class="text-center mt-3">
-                        <button type="submit" class="btn btn-lg btn-primary">{{ __('Masuk') }}</button>
+                        <button type="submit" class="btn btn-lg btn-primary">{{ __('Masuk') }}</button><br><br>
+                        Belum Punya Akun ? Registrasi <a href="{{ url('register') }}">Di Sini !</a>
                     </div>
                 </form>
             </div>

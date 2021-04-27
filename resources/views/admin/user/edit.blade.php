@@ -14,7 +14,7 @@
 									<form action="{{ url('/user/edit/'.$user->id) }}" method="POST" enctype="multipart/form-data">
 										{{ csrf_field() }}
 										<input type="hidden" name="_method" value="PUT">
-										
+										<input type="hidden" name="group"  value="{{ $user->group }}" placeholder="group">
 										
 										<div class="form-group row">
 											<label class="col-form-label col-sm-2 text-sm-right"> {{ __('Nama') }}</label>
@@ -30,6 +30,7 @@
 												@if ($errors->has('email')) <label id="validation-email-error" class="error jquery-validation-error small form-text invalid-feedback" for="validation-email">{{ $errors->first('email') }}</label>@endif
 											</div>
 										</div>
+										@if($user->group != 3)
 										<div class="form-group row">
 											<label class="col-form-label col-sm-2 text-sm-right"> {{ __('Password') }}</label>
 											<div class="col-sm-10">
@@ -42,6 +43,25 @@
 											<div class="col-sm-10">
 												<input type="password" name="password_confirmation" class="form-control @if ($errors->has('password_confirmation')) is-invalid @endif " placeholder="Konfirmasi Password">
 												@if ($errors->has('password_confirmation')) <label id="validation-email-error" class="error jquery-validation-error small form-text invalid-feedback" for="validation-email">{{ $errors->first('password_confirmation') }}</label>@endif
+											</div>
+										</div>
+										@endif
+										<div class="form-group row">
+											<label class="col-form-label col-sm-2 text-sm-right">Status</label>
+											<div class="col-sm-10">
+												<select class="form-control mb-3" name="status">
+													@if($user->status==0)
+														<option value="0" selected>Tidak Aktif</option>
+													@else
+														<option value="0">Tidak Aktif</option>
+													@endif
+													
+													@if($user->status==1)
+														<option value="1" selected>Aktif</option>
+													@else
+														<option value="1">Aktif</option>
+													@endif
+												</select>
 											</div>
 										</div>
 										

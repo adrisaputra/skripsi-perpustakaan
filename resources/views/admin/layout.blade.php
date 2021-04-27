@@ -71,6 +71,7 @@
 						  <i class="align-middle" data-feather="home"></i> <span>Beranda</span>
 						</a>
 					</li>
+					@if(Auth::user()->group == 1)
 					<li class="sidebar-item {{ (request()->is('buku*')) ? 'active' : '' }}">
 						<a href="{{ url('/buku') }}" class="sidebar-link">
 						  <i class="align-middle" data-feather="list"></i> <span>Buku</span>
@@ -104,10 +105,64 @@
 						  <i class="align-middle" data-feather="list"></i> <span>Pengaturan</span>
 						</a>
 					</li>
-					@if(Auth::user()->id == 1)
 					<li class="sidebar-item {{ (request()->is('user*')) ? 'active' : '' }}">
 						<a href="{{ url('/user') }}" class="sidebar-link">
 						  <i class="align-middle" data-feather="user"></i> <span>User</span>
+						</a>
+					</li>
+					@elseif(Auth::user()->group == 2)
+					<li class="sidebar-item {{ (request()->is('buku*')) ? 'active' : '' }}">
+						<a href="{{ url('/buku') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Buku</span>
+						</a>
+					</li>
+					<li class="sidebar-item {{ (request()->is('peminjaman*')) ? 'active' : '' }}">
+						<a href="{{ url('/peminjaman') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Peminjaman</span>
+						</a>
+					</li>
+					<li class="sidebar-item {{ (request()->is('pengembalian*')) ? 'active' : '' }}">
+						<a href="{{ url('/pengembalian') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Pengembalian</span>
+						</a>
+					</li>
+					<li class="sidebar-item {{ (request()->is('anggota*')) ? 'active' : '' }}">
+						<a href="{{ url('/anggota') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Anggota</span>
+						</a>
+					</li>
+					<li class="sidebar-header">
+						SETTING
+					</li>
+					<li class="sidebar-item {{ (request()->is('kategori*')) ? 'active' : '' }}">
+						<a href="{{ url('/kategori') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Kategori</span>
+						</a>
+					</li>
+					<li class="sidebar-item {{ (request()->is('pengaturan*')) ? 'active' : '' }}">
+						<a href="{{ url('/pengaturan') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Pengaturan</span>
+						</a>
+					</li>
+					<li class="sidebar-item {{ (request()->is('user*')) ? 'active' : '' }}">
+						<a href="{{ url('/user') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="user"></i> <span>User</span>
+						</a>
+					</li>
+					@elseif(Auth::user()->group == 3)
+					<li class="sidebar-item {{ (request()->is('peminjaman*')) ? 'active' : '' }}">
+						<a href="{{ url('/peminjaman') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Peminjaman</span>
+						</a>
+					</li>
+					<li class="sidebar-item {{ (request()->is('pengembalian*')) ? 'active' : '' }}">
+						<a href="{{ url('/pengembalian') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Pengembalian</span>
+						</a>
+					</li>
+					<li class="sidebar-item {{ (request()->is('anggota*')) ? 'active' : '' }}">
+						<a href="{{ url('/anggota') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Anggota</span>
 						</a>
 					</li>
 					@endif

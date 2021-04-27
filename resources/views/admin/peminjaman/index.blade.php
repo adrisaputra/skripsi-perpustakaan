@@ -13,7 +13,9 @@
 									<form action="{{ url('/peminjaman/search') }}" method="GET">
 									<div class="row">
 										<div class="col-md-9">
-											<a href="{{ url('/peminjaman/create') }}" class="btn btn-success btn-flat">Tambah Data</a>
+											@if(Auth::user()->group != 3)
+												<a href="{{ url('/peminjaman/create') }}" class="btn btn-success btn-flat">Tambah Data</a>
+											@endif
 											<a href="{{ url('/peminjaman') }}" class="btn btn-warning btn-flat">Refresh</a>
 										</div>
 										<div class="col-md-3">
@@ -46,7 +48,9 @@
 													<th style="width:10%;">Nama Buku</th>
 													<th style="width:10%;">Tanggal Pinjam</th>
 													<th style="width:10%;">Tanggal Kembali</th>
-													<th style="width:10%;">Aksi</th>
+													@if(Auth::user()->group != 3)
+														<th style="width:10%;">Aksi</th>
+													@endif
 												</tr>
 											</thead>
 											<tbody>
@@ -57,10 +61,12 @@
 													<td>{{ $v->buku->judul }}</td>
 													<td>{{ date('d-m-Y', strtotime($v->tanggal_pinjam)) }}</td>
 													<td>{{ date('d-m-Y', strtotime($v->tanggal_kembali)) }}</td>
-													<td>
-														<a href="{{ url('/peminjaman/edit/'.$v->id ) }}"><i class="align-middle" data-feather="edit-2"></i></a> |
-														<a href="{{ url('/peminjaman/hapus/'.$v->id ) }}" onclick="return confirm('Anda Yakin ?');"><i class="align-middle" data-feather="trash"></i></a>
-													</td>
+													@if(Auth::user()->group != 3)
+														<td>
+															<a href="{{ url('/peminjaman/edit/'.$v->id ) }}"><i class="align-middle" data-feather="edit-2"></i></a> |
+															<a href="{{ url('/peminjaman/hapus/'.$v->id ) }}" onclick="return confirm('Anda Yakin ?');"><i class="align-middle" data-feather="trash"></i></a>
+														</td>
+													@endif
 												</tr>
 												@endforeach
 											</tbody>

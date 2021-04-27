@@ -23,8 +23,13 @@ class PengembalianController extends Controller
     ## Tampikan Data
     public function index()
     {
+        if(Auth::user()->group == 3){
+            $anggota = DB::table('anggota_tbl')->where('nis',Auth::user()->name)->get()->toArray();
+            $pengembalian = Pengembalian::select('*', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))->where('status',0)->where('anggota_id',$anggota[0]->id)->orderBy('id','DESC')->paginate(25);
+        } else {
+            $pengembalian = Pengembalian::select('*', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))->where('status',0)->orderBy('id','DESC')->paginate(25);
+        }
         $pengaturan = DB::table('pengaturan_tbl')->where('id',1)->get()->toArray();
-        $pengembalian = Pengembalian::select('*', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))->where('status',0)->orderBy('id','DESC')->paginate(25);
 		return view('admin.pengembalian.index',compact('pengembalian','pengaturan'));
     }
 
@@ -32,16 +37,40 @@ class PengembalianController extends Controller
 	public function search(Request $request)
     {
         $search = $request->get('search');
-        $pengembalian = Pengembalian::select('*', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))
-                ->where('tanggal_pinjam', 'LIKE', '%'.$search.'%')
-                ->orWhere('tanggal_kembali', 'LIKE', '%'.$search.'%')
-                ->orwhereHas('buku', function ($query) use ($search) {
-                    $query->where('judul', 'LIKE', '%'. $search .'%');
-                })
-                ->orWhereHas('anggota', function ($query) use ($search) {
-                    $query->where('nama', 'LIKE', '%'. $search .'%');
-                })
-                ->orderBy('id','DESC')->paginate(25);
+
+        if(Auth::user()->group == 3){ 
+            $anggota = DB::table('anggota_tbl')->where('nis',Auth::user()->name)->get()->toArray();
+            $pengembalian = Pengembalian::select('*', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))
+                    ->where('status',0)
+                    ->where('anggota_id',$anggota[0]->id)
+                    ->where(function ($query) use ($search) {
+                        $query->where(function ($query) use ($search) {
+                            $query->where('tanggal_pinjam', 'LIKE', '%'.$search.'%')
+                                ->orWhere('tanggal_kembali', 'LIKE', '%'.$search.'%');
+                        })
+                        ->orwhereHas('buku', function ($query) use ($search) {
+                            $query->where('judul', 'LIKE', '%'. $search .'%');
+                        })
+                        ->orWhereHas('anggota', function ($query) use ($search) {
+                            $query->where('nama', 'LIKE', '%'. $search .'%');
+                        });
+                    })
+                    ->orderBy('id','DESC')->paginate(25);
+        } else {
+            $pengembalian = Pengembalian::select('*', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))
+                    ->where('status',0)
+                    ->where(function ($query) use ($search) {
+                        $query->where('tanggal_pinjam', 'LIKE', '%'.$search.'%')
+                            ->orWhere('tanggal_kembali', 'LIKE', '%'.$search.'%');
+                    })
+                    ->orwhereHas('buku', function ($query) use ($search) {
+                        $query->where('judul', 'LIKE', '%'. $search .'%');
+                    })
+                    ->orWhereHas('anggota', function ($query) use ($search) {
+                        $query->where('nama', 'LIKE', '%'. $search .'%');
+                    })
+                    ->orderBy('id','DESC')->paginate(25);
+        }
         $pengaturan = DB::table('pengaturan_tbl')->where('id',1)->get()->toArray();
 		return view('admin.pengembalian.index',compact('pengembalian','pengaturan'));
     }

@@ -97,6 +97,12 @@ class UserController extends Controller
 				'password' => 'required|string|min:8|confirmed',
 				'status' => 'required'
 			]);
+		} else if($request->group !=3){
+			$this->validate($request, [
+				'name' => 'required|string|max:255',
+				'password' => 'required|string|min:8|confirmed',
+				'status' => 'required'
+			]);
 		} else {
 			$this->validate($request, [
 				'name' => 'required|string|max:255',
@@ -109,7 +115,7 @@ class UserController extends Controller
 		if($request->password){
 			$user->password = Hash::make($request->password);
 		}
-    	$user->save();
+    		$user->save();
 		
 		$group = Auth::user()->group;
 		if($group !=1 ){
