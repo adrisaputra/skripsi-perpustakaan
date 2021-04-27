@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggota;   //nama model
+use App\Models\User;   //nama model
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //untuk membuat query di controller
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AnggotaController extends Controller
 {
@@ -63,7 +65,7 @@ class AnggotaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nis' => 'required|numeric',
+            'nis' => 'required|numeric|unique:anggota_tbl',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'kelas' => 'required',
@@ -89,6 +91,15 @@ class AnggotaController extends Controller
 		
         Anggota::create($input);
 		
+        
+		$input2['name'] = $request->nis;
+        $input2['email'] = $request->nis."@gmail.com";
+        $input2['password'] = Hash::make($request->nis);
+        $input2['nis'] = $request->nis;
+        $input2['group'] = 3;
+        
+        User::create($input2);
+
 		return redirect('/anggota')->with('status','Data Tersimpan');
     }
 

@@ -32,8 +32,8 @@
 											<div class="col-sm-10">
 												<select class="form-control @if ($errors->has('jenis_kelamin')) is-invalid @endif " name="jenis_kelamin">
 													<option value="">- Pilih -</option>
-													<option value="Laki-laki">Laki-laki</option>
-													<option value="Perempuan">Perempuan</option>
+													<option value="Laki-laki" @if(old('jenis_kelamin')=="Laki-laki") selected @endif>Laki-laki</option>
+													<option value="Perempuan" @if(old('jenis_kelamin')=="Perempuan") selected @endif>Perempuan</option>
 												</select>
 												@if ($errors->has('jenis_kelamin')) <label id="validation-email-error" class="error jquery-validation-error small form-text invalid-feedback" for="validation-email">{{ $errors->first('jenis_kelamin') }}</label>@endif
 											</div>
