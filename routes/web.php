@@ -11,6 +11,7 @@ use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\DendaController;
 use App\Http\Controllers\PengaturanController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PasswordController;
 
@@ -104,6 +105,15 @@ Route::post('/pengaturan', [PengaturanController::class, 'store']);
 Route::get('/pengaturan/edit/{pengaturan}', [PengaturanController::class, 'edit']);
 Route::put('/pengaturan/edit/{pengaturan}', [PengaturanController::class, 'update']);
 Route::get('/pengaturan/hapus/{pengaturan}',[PengaturanController::class, 'delete']);
+
+## Slider
+Route::get('/slider', [SliderController::class, 'index']);
+Route::get('/slider/search', [SliderController::class, 'search']);
+Route::get('/slider/create', [SliderController::class, 'create']);
+Route::post('/slider', [SliderController::class, 'store']);
+Route::get('/slider/edit/{slider}', [SliderController::class, 'edit']);
+Route::put('/slider/edit/{slider}', [SliderController::class, 'update']);
+Route::get('/slider/hapus/{slider}',[SliderController::class, 'delete']);
 
 ## User
 Route::get('/user', [UserController::class, 'index']);

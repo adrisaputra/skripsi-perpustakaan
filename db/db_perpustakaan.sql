@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versi server:                 10.4.17-MariaDB - mariadb.org binary distribution
+-- Versi server:                 10.4.19-MariaDB - mariadb.org binary distribution
 -- OS Server:                    Win64
 -- HeidiSQL Versi:               10.3.0.5771
 -- --------------------------------------------------------
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `buku_tbl` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Membuang data untuk tabel db_perpustakaan.buku_tbl: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_perpustakaan.buku_tbl: ~2 rows (lebih kurang)
 /*!40000 ALTER TABLE `buku_tbl` DISABLE KEYS */;
 INSERT INTO `buku_tbl` (`id`, `isbn`, `kategori_id`, `judul`, `nama_penulis`, `nama_penerbit`, `tahun_terbit`, `jumlah_buku`, `rak_buku`, `deskripsi`, `file`, `cover`, `user_id`, `created_at`, `updated_at`) VALUES
 	(1, '978-602-030-112-9', 1, 'Bumi', 'Tere Liye', 'Gramedia Pustaka Utama', 2014, NULL, NULL, 'Raib, seorang gadis berumur 15 tahun. Ia sama seperti remaja lainya. Kecuali satu hal, Sesuatu yang ia simpan sendiri sejak kecil. Sesuatu yang menakjubkan. Raib bisa menghilang. Cukup dengan menutup wajah dengan kedua tangan tubuhnya pun menghilang. Kekuatan aneh itu telah ada sejak ia masih kecil, bahkan sejak umur 2 tahun Raib suka sekali bermain petak umpat bersama orangtuanya. Raib meletakan kedua telapak tanganya di wajah, dan menghilang. Saat ulang tahunku yang kesembilan, aku mendapat hadiah 2 ekor kucing kembar entah dari siapa. Kedua kucing itu kuberi nama si Hitam dan si Putih.\r\n\r\nSeli merupakan sahabat sekaligus teman semeja Raib. Suatu hari, seli bertabrakan dengan Ali si Biang kerok, mereka bertengkar dan Raib dapat membereskan pertengkaran kecil itu. Saat pelajaran miss keriting alias miss selena, Raib dan Ali di hukum. Mereka tidak boleh mengikuti pelajaran matematika kala itu karena mereka tidak mengumpulkan tugas. Raib menutup wajahnya dan mengintip di sela jarinya, tiba-tiba seseorang dengan tubuh kurus tinggi entah datang darimana mengagetkanya. Sontak saja Ali melihat Raib yang tiba-tiba muncul dan menyudutkan Raib dengan segala pertanyaan. Ali juga memasang beberapa alat buatannya disekolah dan tasku untuk mengetahui suatu hal yang membuatnya penasaran itu.', '1615820524.pdf', '1615817498.jpg', 1, '2021-03-15 14:11:38', '2021-03-15 15:04:17'),
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `denda_tbl` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Membuang data untuk tabel db_perpustakaan.denda_tbl: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_perpustakaan.denda_tbl: ~1 rows (lebih kurang)
 /*!40000 ALTER TABLE `denda_tbl` DISABLE KEYS */;
 INSERT INTO `denda_tbl` (`id`, `anggota_id`, `buku_id`, `tanggal_pinjam`, `tanggal_hrs_kembali`, `tanggal_kembali`, `hari`, `denda`, `user_id`, `created_at`, `updated_at`) VALUES
 	(1, 1, 1, '2021-03-08', '2021-03-15', '2021-03-23', 8, 16000, 1, '2021-03-23 19:28:44', '2021-03-23 19:28:44');
@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `pengaturan_tbl` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Membuang data untuk tabel db_perpustakaan.pengaturan_tbl: ~2 rows (lebih kurang)
+-- Membuang data untuk tabel db_perpustakaan.pengaturan_tbl: ~1 rows (lebih kurang)
 /*!40000 ALTER TABLE `pengaturan_tbl` DISABLE KEYS */;
 INSERT INTO `pengaturan_tbl` (`id`, `nama`, `jumlah`, `user_id`, `created_at`, `updated_at`) VALUES
 	(1, 'Denda', '1000', 1, '2021-03-15 22:14:41', '2021-03-23 19:47:36');
@@ -222,12 +222,31 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   KEY `sessions_last_activity_index` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel db_perpustakaan.sessions: ~2 rows (lebih kurang)
+-- Membuang data untuk tabel db_perpustakaan.sessions: ~3 rows (lebih kurang)
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
 	('39mrNx29PCyiP5utKqqKwGleD2lNFDPAnuYMqVhh', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoia0lhcFM3dUdKNVN4cDV0eGxmNE1lRzNobHA0UjhBbnVVVU1KMEZvbiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly9sb2NhbGhvc3QvcGVycHVzdGFrYWFuIjt9fQ==', 1619506615),
+	('89OxPoxLsx24rTkpIuV9B8ZHQDhINznICXRBqp62', 9, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiR1QyR25Ra2RKazZnS2wzWUN4UjRnUEx4RVF5eDZNQmo5RTZHY3VsSSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9sb2NhbGhvc3QvcGVycHVzdGFrYWFuL2Rhc2hib2FyZCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjk7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCRDOFlmUHlkd0ZQUjVGNEtZMk1kVDllbFhRRTRYT0ExeDJBSWw0eC5PQ3J2MzVOc0VJWkE0QyI7fQ==', 1622430823),
 	('OiP5kJWTK32ukzt2GROte1CNnDZXie4msjt8baWw', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoibjRYZEFHVkNmeGJMZGxkOUIzZ2lwTWk1Q2JFZnUwQWdsNzJQdGdjUSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly9sb2NhbGhvc3QvcGVycHVzdGFrYWFuL2FuZ2dvdGEiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkaTlSOVFGRWJYNG03dlRIcUxVU2c5dWZQSy9lZ1BWZlUwbWFEL1BKZHFVbzFqd0NLOEdHbHEiO30=', 1619506513);
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+
+-- membuang struktur untuk table db_perpustakaan.slider_tbl
+CREATE TABLE IF NOT EXISTS `slider_tbl` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `judul` varchar(300) DEFAULT NULL,
+  `isi` text DEFAULT NULL,
+  `gambar` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
+-- Membuang data untuk tabel db_perpustakaan.slider_tbl: ~2 rows (lebih kurang)
+/*!40000 ALTER TABLE `slider_tbl` DISABLE KEYS */;
+INSERT INTO `slider_tbl` (`id`, `judul`, `isi`, `gambar`, `created_at`, `updated_at`) VALUES
+	(4, 'xx', 'xx', '1622430080.jpg', '2021-05-31 11:01:20', '2021-05-31 11:01:20'),
+	(5, 'xcds', 'cdcd', '1622430092.jpg', '2021-05-31 11:01:32', '2021-05-31 11:01:32');
+/*!40000 ALTER TABLE `slider_tbl` ENABLE KEYS */;
 
 -- membuang struktur untuk table db_perpustakaan.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -243,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `nis` double DEFAULT NULL,
   `status` int(11) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

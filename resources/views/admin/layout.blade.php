@@ -105,6 +105,11 @@
 						  <i class="align-middle" data-feather="list"></i> <span>Pengaturan</span>
 						</a>
 					</li>
+					<li class="sidebar-item {{ (request()->is('slider*')) ? 'active' : '' }}">
+						<a href="{{ url('/slider') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Slider</span>
+						</a>
+					</li>
 					<li class="sidebar-item {{ (request()->is('user*')) ? 'active' : '' }}">
 						<a href="{{ url('/user') }}" class="sidebar-link">
 						  <i class="align-middle" data-feather="user"></i> <span>User</span>
@@ -142,6 +147,11 @@
 					<li class="sidebar-item {{ (request()->is('pengaturan*')) ? 'active' : '' }}">
 						<a href="{{ url('/pengaturan') }}" class="sidebar-link">
 						  <i class="align-middle" data-feather="list"></i> <span>Pengaturan</span>
+						</a>
+					</li>
+					<li class="sidebar-item {{ (request()->is('slider*')) ? 'active' : '' }}">
+						<a href="{{ url('/slider') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Slider</span>
 						</a>
 					</li>
 					<li class="sidebar-item {{ (request()->is('user*')) ? 'active' : '' }}">
