@@ -95,6 +95,11 @@
 					<li class="sidebar-header">
 						SETTING
 					</li>
+					<li class="sidebar-item {{ (request()->is('penggunaan*')) ? 'active' : '' }}">
+						<a href="{{ url('/penggunaan') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Cara Penggunaan Aplikasi</span>
+						</a>
+					</li>
 					<li class="sidebar-item {{ (request()->is('kategori*')) ? 'active' : '' }}">
 						<a href="{{ url('/kategori') }}" class="sidebar-link">
 						  <i class="align-middle" data-feather="list"></i> <span>Kategori</span>
@@ -139,6 +144,11 @@
 					<li class="sidebar-header">
 						SETTING
 					</li>
+					<li class="sidebar-item {{ (request()->is('penggunaan*')) ? 'active' : '' }}">
+						<a href="{{ url('/penggunaan') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Cara Penggunaan Aplikasi</span>
+						</a>
+					</li>
 					<li class="sidebar-item {{ (request()->is('kategori*')) ? 'active' : '' }}">
 						<a href="{{ url('/kategori') }}" class="sidebar-link">
 						  <i class="align-middle" data-feather="list"></i> <span>Kategori</span>
@@ -173,6 +183,14 @@
 					<li class="sidebar-item {{ (request()->is('anggota*')) ? 'active' : '' }}">
 						<a href="{{ url('/anggota') }}" class="sidebar-link">
 						  <i class="align-middle" data-feather="list"></i> <span>Anggota</span>
+						</a>
+					</li>
+					<li class="sidebar-header">
+						SETTING
+					</li>
+					<li class="sidebar-item {{ (request()->is('penggunaan*')) ? 'active' : '' }}">
+						<a href="{{ url('/penggunaan') }}" class="sidebar-link">
+						  <i class="align-middle" data-feather="list"></i> <span>Cara Penggunaan Aplikasi</span>
 						</a>
 					</li>
 					@endif

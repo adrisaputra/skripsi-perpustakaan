@@ -13,6 +13,7 @@ use App\Http\Controllers\DendaController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PenggunaanController;
 use App\Http\Controllers\PasswordController;
 
 /*
@@ -123,6 +124,9 @@ Route::post('/user', [UserController::class, 'store']);
 Route::get('/user/edit/{user}', [UserController::class, 'edit']);
 Route::put('/user/edit/{user}', [UserController::class, 'update']);
 Route::get('/user/hapus/{user}',[UserController::class, 'delete']);
+
+## Penggunaan
+Route::get('/penggunaan', [PenggunaanController::class, 'index']);
 
 ## Password
 Route::group(['middleware' => 'auth'], function () {
