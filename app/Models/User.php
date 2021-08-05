@@ -29,6 +29,7 @@ class User extends Authenticatable
         'password',
         'nis',
         'group',
+        'foto',
         'status',
     ];
 

@@ -25,9 +25,13 @@ class PeminjamanController extends Controller
     {
         if(Auth::user()->group == 3){
             $anggota = DB::table('anggota_tbl')->where('nis',Auth::user()->name)->get()->toArray();
-            $peminjaman = Peminjaman::where('status',0)->where('anggota_id',$anggota[0]->id)->orderBy('id','DESC')->paginate(25);
+            $peminjaman = Peminjaman::select('peminjaman_tbl.*','users.name')
+                        ->leftJoin('users', 'peminjaman_tbl.user_id', '=', 'users.id')
+                        ->where('peminjaman_tbl.status',0)->where('anggota_id',$anggota[0]->id)->orderBy('id','DESC')->paginate(25);
         } else {
-            $peminjaman = Peminjaman::where('status',0)->orderBy('id','DESC')->paginate(25);
+            $peminjaman = Peminjaman::select('peminjaman_tbl.*','users.name')
+                        ->leftJoin('users', 'peminjaman_tbl.user_id', '=', 'users.id')
+                        ->where('peminjaman_tbl.status',0)->orderBy('id','DESC')->paginate(25);
         }
         $pengaturan = DB::table('pengaturan_tbl')->where('id',1)->get()->toArray();
 		return view('admin.peminjaman.index',compact('peminjaman','pengaturan'));
@@ -39,8 +43,9 @@ class PeminjamanController extends Controller
         if(Auth::user()->group == 3){
             $search = $request->get('search');
             $anggota = DB::table('anggota_tbl')->where('nis',Auth::user()->name)->get()->toArray();
-            $peminjaman = Peminjaman::
-                    where('status',0)
+            $peminjaman = Peminjaman::select('peminjaman_tbl.*','users.name')
+                    ->leftJoin('users', 'peminjaman_tbl.user_id', '=', 'users.id')
+                    ->where('peminjaman_tbl.status',0)
                     ->where('anggota_id',$anggota[0]->id)
                     ->where(function ($query) use ($search) {
                         $query->where(function ($query) use ($search) {
@@ -57,8 +62,9 @@ class PeminjamanController extends Controller
                     ->orderBy('id','DESC')->paginate(25);
         } else {
             $search = $request->get('search');
-            $peminjaman = Peminjaman::
-                    where('status',0)
+            $peminjaman = Peminjaman::select('peminjaman_tbl.*','users.name')
+                    ->leftJoin('users', 'peminjaman_tbl.user_id', '=', 'users.id')
+                    ->where('peminjaman_tbl.status',0)
                     ->where(function ($query) use ($search) {
                         $query->where('tanggal_pinjam', 'LIKE', '%'.$search.'%')
                             ->orWhere('tanggal_kembali', 'LIKE', '%'.$search.'%');

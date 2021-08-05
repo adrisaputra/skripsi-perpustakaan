@@ -25,9 +25,13 @@ class PengembalianController extends Controller
     {
         if(Auth::user()->group == 3){
             $anggota = DB::table('anggota_tbl')->where('nis',Auth::user()->name)->get()->toArray();
-            $pengembalian = Pengembalian::select('*', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))->where('status',0)->where('anggota_id',$anggota[0]->id)->orderBy('id','DESC')->paginate(25);
+            $pengembalian = Pengembalian::select('peminjaman_tbl.*','users.name', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))
+                        ->leftJoin('users', 'peminjaman_tbl.user_id', '=', 'users.id')
+                        ->where('peminjaman_tbl.status',0)->where('anggota_id',$anggota[0]->id)->orderBy('id','DESC')->paginate(25);
         } else {
-            $pengembalian = Pengembalian::select('*', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))->where('status',0)->orderBy('id','DESC')->paginate(25);
+            $pengembalian = Pengembalian::select('peminjaman_tbl.*','users.name', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))
+            ->leftJoin('users', 'peminjaman_tbl.user_id', '=', 'users.id')
+            ->where('peminjaman_tbl.status',0)->orderBy('id','DESC')->paginate(25);
         }
         $pengaturan = DB::table('pengaturan_tbl')->where('id',1)->get()->toArray();
 		return view('admin.pengembalian.index',compact('pengembalian','pengaturan'));
@@ -40,8 +44,9 @@ class PengembalianController extends Controller
 
         if(Auth::user()->group == 3){ 
             $anggota = DB::table('anggota_tbl')->where('nis',Auth::user()->name)->get()->toArray();
-            $pengembalian = Pengembalian::select('*', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))
-                    ->where('status',0)
+            $pengembalian = Pengembalian::select('peminjaman_tbl.*','users.name', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))
+                    ->leftJoin('users', 'peminjaman_tbl.user_id', '=', 'users.id')
+                    ->where('peminjaman_tbl.status',0)
                     ->where('anggota_id',$anggota[0]->id)
                     ->where(function ($query) use ($search) {
                         $query->where(function ($query) use ($search) {
@@ -57,8 +62,9 @@ class PengembalianController extends Controller
                     })
                     ->orderBy('id','DESC')->paginate(25);
         } else {
-            $pengembalian = Pengembalian::select('*', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))
-                    ->where('status',0)
+            $pengembalian = Pengembalian::select('peminjaman_tbl.*','users.name', DB::raw(" DATEDIFF(CURDATE(),tanggal_kembali) as hari"))
+                    ->leftJoin('users', 'peminjaman_tbl.user_id', '=', 'users.id')
+                    ->where('peminjaman_tbl.status',0)
                     ->where(function ($query) use ($search) {
                         $query->where('tanggal_pinjam', 'LIKE', '%'.$search.'%')
                             ->orWhere('tanggal_kembali', 'LIKE', '%'.$search.'%');
@@ -97,7 +103,7 @@ class PengembalianController extends Controller
         $pengembalian->fill($request->all());
         
 		$pengembalian->status = 1;
-		$pengembalian->user_id = Auth::user()->id;
+		$pengembalian->user_id2 = Auth::user()->id;
     	$pengembalian->save();
         
         if($request->hari>0){

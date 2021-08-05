@@ -196,7 +196,11 @@
 					@endif
 				<div class="sidebar-bottom d-none d-lg-block">
 					<div class="media">
-						<img class="rounded-circle mr-3" src="{{ asset('/assets/img/avatars/15.jpg') }}" alt="Chris Wood" width="40" height="40">
+						@if(Auth::user()->foto)
+							<img class="rounded-circle mr-3" src="{{ asset('upload/foto/'.Auth::user()->foto) }}" alt="Chris Wood" width="40" height="40">
+						@else
+							<img class="rounded-circle mr-3" src="{{ asset('/assets/img/avatars/15.jpg') }}" alt="Chris Wood" width="40" height="40">
+						@endif 
 						<div class="media-body">
 							<h5 class="mb-1">{{ Auth::user()->name }} </h5>
 							<div>
@@ -224,10 +228,15 @@
 						    </a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
-							`<img src="{{ asset('/assets/img/avatars/15.jpg') }}" class="avatar img-fluid rounded-circle mr-1" alt="Chris Wood"> <span class="text-dark">{{ Auth::user()->name }} </span>
+							 @if(Auth::user()->foto)
+                                        <img src="{{ asset('upload/foto/'.Auth::user()->foto) }}" class="avatar img-fluid rounded-circle mr-1" alt="Chris Wood"> <span class="text-dark">{{ Auth::user()->name }} </span>
+                                    @else
+							 	<img src="{{ asset('/assets/img/avatars/15.jpg') }}" class="avatar img-fluid rounded-circle mr-1" alt="Chris Wood"> <span class="text-dark">{{ Auth::user()->name }} </span>
+                                    @endif   
+							
 						    </a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="{{ url('/password') }}">Ganti Password</a>
+								<a class="dropdown-item" href="{{ url('/user/edit_profil/'.Auth::user()->id) }}">Profil</a>
 								<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Sign out') }}</a>

@@ -48,6 +48,7 @@
 													<th style="width:10%;">Nama Buku</th>
 													<th style="width:10%;">Tanggal Pinjam</th>
 													<th style="width:10%;">Tanggal Kembali</th>
+													<th style="width:10%;">Nama Admin</th>
 													@if(Auth::user()->group != 3)
 														<th style="width:10%;">Aksi</th>
 													@endif
@@ -61,6 +62,7 @@
 													<td>{{ $v->buku->judul }}</td>
 													<td>{{ date('d-m-Y', strtotime($v->tanggal_pinjam)) }}</td>
 													<td>{{ date('d-m-Y', strtotime($v->tanggal_kembali)) }}</td>
+													<td>{{ $v->name }}</td>
 													@if(Auth::user()->group != 3)
 														<td>
 															<a href="{{ url('/peminjaman/edit/'.$v->id ) }}"><i class="align-middle" data-feather="edit-2"></i></a> |
