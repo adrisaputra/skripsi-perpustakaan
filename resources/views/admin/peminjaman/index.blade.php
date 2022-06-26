@@ -16,6 +16,7 @@
 											@if(Auth::user()->group != 3)
 												<a href="{{ url('/peminjaman/create') }}" class="btn btn-success btn-flat">Tambah Data</a>
 											@endif
+											<a href="{{ url('/peminjaman/print') }}" class="btn btn-primary btn-flat">Cetak</a>
 											<a href="{{ url('/peminjaman') }}" class="btn btn-warning btn-flat">Refresh</a>
 										</div>
 										<div class="col-md-3">

@@ -13,6 +13,7 @@
 									<form action="{{ url('/pengembalian/search') }}" method="GET">
 									<div class="row">
 										<div class="col-md-9">
+											<a href="{{ url('/pengembalian/print') }}" class="btn btn-primary btn-flat">Cetak</a>
 											<a href="{{ url('/pengembalian') }}" class="btn btn-warning btn-flat">Refresh</a>
 										</div>
 										<div class="col-md-3">

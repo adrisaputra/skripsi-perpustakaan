@@ -77,6 +77,7 @@ Route::put('/peminjaman/edit/{peminjaman}', [PeminjamanController::class, 'updat
 Route::get('/peminjaman/show/{peminjaman}', [PeminjamanController::class, 'show']);
 Route::put('/peminjaman/edit2/{peminjaman}', [PeminjamanController::class, 'update2']);
 Route::get('/peminjaman/hapus/{peminjaman}',[PeminjamanController::class, 'delete']);
+Route::get('/peminjaman/print',[PeminjamanController::class, 'print']);
 
 ## Peminjaman
 Route::get('/pengembalian', [PengembalianController::class, 'index']);
@@ -88,6 +89,7 @@ Route::put('/pengembalian/edit/{pengembalian}', [PengembalianController::class, 
 Route::get('/pengembalian/show/{pengembalian}', [PengembalianController::class, 'show']);
 Route::put('/pengembalian/edit2/{pengembalian}', [PengembalianController::class, 'update2']);
 Route::get('/pengembalian/hapus/{pengembalian}',[PengembalianController::class, 'delete']);
+Route::get('/pengembalian/print',[PengembalianController::class, 'print']);
 
 ## Denda
 Route::get('/denda', [DendaController::class, 'index']);
